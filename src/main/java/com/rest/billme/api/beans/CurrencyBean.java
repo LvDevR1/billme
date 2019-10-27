@@ -1,7 +1,5 @@
 package com.rest.billme.api.beans;
 
-import javax.persistence.Entity;
-
 import lombok.Data;
 
 @Data

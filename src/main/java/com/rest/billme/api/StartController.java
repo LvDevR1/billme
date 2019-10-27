@@ -1,10 +1,15 @@
 package com.rest.billme.api;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
 import java.util.List;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import org.springframework.http.MediaType;
+import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,7 +44,7 @@ public class StartController {
         return requestLogRepository.findAll();
     }
 
-    @GetMapping("/currencies/{currencyCode}")
+    @GetMapping(value = "/currencies/{currencyCode}", produces = APPLICATION_JSON_VALUE)
     CurrencyBean getCurrencyByCode(@PathVariable("currencyCode") @NotBlank @Size(min = 3, max = 3) String currencyCode) {
         return currencyService.getCurrencyByCode(currencyCode);
     }
