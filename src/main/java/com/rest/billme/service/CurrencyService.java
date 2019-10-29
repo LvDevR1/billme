@@ -1,7 +1,5 @@
 package com.rest.billme.service;
 
-import java.util.List;
-
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Component;
 
@@ -35,9 +33,4 @@ public class CurrencyService {
         }
         return currencyBean;
     }
-
-    public List<Currency> getAll() {
-        return currencyRepository.findAll();
-    }
-
 }

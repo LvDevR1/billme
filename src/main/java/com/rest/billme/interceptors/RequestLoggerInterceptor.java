@@ -2,9 +2,6 @@ package com.rest.billme.interceptors;
 
 import static java.time.LocalDateTime.now;
 import static org.springframework.util.StringUtils.isEmpty;
-import static org.springframework.web.servlet.HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE;
-
-import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,17 +13,16 @@ import com.rest.billme.domain.RequestLogEntry;
 import com.rest.billme.repository.RequestLogRepository;
 
 @Component
-public class LoggerInterceptor extends HandlerInterceptorAdapter {
+public class RequestLoggerInterceptor extends HandlerInterceptorAdapter {
 
     private RequestLogRepository requestLogRepository;
 
-    public LoggerInterceptor(RequestLogRepository requestLogRepository) {
+    public RequestLoggerInterceptor(RequestLogRepository requestLogRepository) {
         this.requestLogRepository = requestLogRepository;
     }
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-
         String requestUri = request.getRequestURI();
         String[] pathParams = requestUri.split("/");
         if (pathParams.length == 3 && "currencies".equals(pathParams[1])) {
@@ -38,7 +34,6 @@ public class LoggerInterceptor extends HandlerInterceptorAdapter {
             ipAddress = isEmpty(ipAddress) ? request.getRemoteAddr() : ipAddress;
             entry.setClientIp(ipAddress);
             requestLogRepository.save(entry);
-
         }
         return true;
     }

@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
+<link href="../css/style.css" rel="stylesheet">
 <head>
     <title>Title of the document</title>
 </head>
 <body>
     <div th:switch="${requestLogs}">
-        <h2 th:case="null">No request logs yet</h2>
-        <div th:case="*">
+        <h2 th:if="${requestLogs == null || requestLogs.isEmpty()}">No request logs yet</h2>
+        <div th:unless="${requestLogs == null || requestLogs.isEmpty()}">
             <h2>Request Logs</h2>
             <table>
                 <thead>
@@ -19,9 +20,8 @@
                 <tbody>
                 <tr th:each="requestLog : ${requestLogs}">
                     <td th:text="${requestLog.requestDate}"></td>
-                    <td th:text="${requestLog.currencyCode}"></td>
+                    <td class="currency-th" th:text="${requestLog.currencyCode}"></td>
                     <td th:text="${requestLog.clientIp}"></td>
-
                 </tr>
                 </tbody>
             </table>

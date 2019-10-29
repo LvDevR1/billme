@@ -15,9 +15,8 @@ public class RequestLogController {
         this.requestLogService = requestLogService;
     }
 
-
     @GetMapping("/log")
-    String getAllLogs(Model model) {
+    public String getAllLogs(Model model) {
         model.addAttribute("requestLogs", requestLogService.getAllLogs());
         return "index";
     }

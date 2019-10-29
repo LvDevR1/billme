@@ -10,7 +10,7 @@ class TestConfiguration {
 
     @Bean
     MockMvc testingMockMvc(WebApplicationContext webApplicationContext) {
-        webAppContextSetup(webApplicationContext).build();
+        webAppContextSetup(webApplicationContext).build()
     }
 
 }

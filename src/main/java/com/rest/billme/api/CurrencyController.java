@@ -1,47 +1,26 @@
 package com.rest.billme.api;
 
-import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-
-import java.util.List;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-import org.springframework.http.MediaType;
-import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rest.billme.api.beans.CurrencyBean;
-import com.rest.billme.domain.Currency;
-import com.rest.billme.domain.RequestLogEntry;
-import com.rest.billme.repository.RequestLogRepository;
 import com.rest.billme.service.CurrencyService;
 
 @RestController
 @Validated
-public class StartController {
+public class CurrencyController {
 
     private final CurrencyService currencyService;
 
-    private final RequestLogRepository requestLogRepository;
-
-    StartController(CurrencyService currencyService, RequestLogRepository requestLogRepository) {
+    CurrencyController(CurrencyService currencyService) {
         this.currencyService = currencyService;
-        this.requestLogRepository = requestLogRepository;
-    }
-
-    @GetMapping("/currencies")
-    List<Currency> getAllCurrencies() {
-        return currencyService.getAll();
-    }
-
-    @GetMapping("/logs")
-    List<RequestLogEntry> getAllLogs() {
-        return requestLogRepository.findAll();
     }
 
     @GetMapping(value = "/currencies/{currencyCode}", produces = APPLICATION_JSON_VALUE)
